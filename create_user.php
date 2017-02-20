@@ -17,7 +17,7 @@
 	//$query_col = trim($query_col);
 	//echo $query_col;
 	$finQuery = rtrim($query_col, ", ") . ")  values " . rtrim($query_val, ", ") . ");";
-	echo $finQuery;
+	//echo $finQuery;
 	$con->query($finQuery);
 	
 
