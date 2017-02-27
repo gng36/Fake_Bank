@@ -17,8 +17,8 @@ create table account (
 	account_number int not null auto_increment,
 	type varchar(255) not null,
 	username varchar(255) not null,
-	balance int not null default 0,
-	interest_rate float(4,4) not null default 0,
+	balance decimal(20,2) not null default 0.0,
+	interest_rate decimal(4,2) not null default 1,
 	foreign key (username) references user(username),
 	primary key (account_number)
 );
@@ -31,17 +31,11 @@ create table transaction (
 	withdraw_from_acc_num int,
 	deposit_to_acc_num int,
 	trans_date Date,
+	amount decimal(20,2),
 	foreign key (acc_num_to) references account(account_number),
 	foreign key (acc_num_from) references account(account_number),
 	foreign key (withdraw_from_acc_num) references account(account_number),
 	foreign key (deposit_to_acc_num) references account(account_number),
 	primary key(trans_id)
 );
-
-CREATE
-    TRIGGER `overdraft` BEFORE UPDATE
-    ON `user`.`account`
-    FOR EACH ROW BEGIN
-	
-    END;
 
