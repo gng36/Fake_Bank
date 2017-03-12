@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+         <script type="text/javascript">
+            $(document).ready(function(){
+            var response = '';
+            $.ajax({ type: "GET",   
+                     url: "get_acct_info.php",   
+                     async: false,
+                     success : function(text)
+                     {
+			var rdata = jQuery.parseJSON(text);
+                         response = rdata;
+                     }
+            });
+
+            console.log(response);
+		document.getElementById('name1').value = response.name;
+		document.getElementById('Checking').value = response.Checking;
+		document.getElementById('Saving').value = response.Saving;
+            });
+            </script>
+
+
+<!--
+<script type="text/javascript">
+$.get("get_acct_info.php", function(data){
+	var mydata=$.parseJSON(data);
+	var name = mydata.name;
+console.log(mydata);
+});
+</script>-->
+	</head>
+<body>
+    <div>
+
+	<fieldset>
+		<p>Welcome to FAKE BANK</p>
+		
+		
+		<p>Account Update</p>
+		<p></p>
+		<form action="adminUpdate.php" method="post">
+						<label>Username</label>
+				<input id="name1" name="username" type="text" >
+		
+			
+				<label>Checking</label>
+				<input id="Checking" name="checkamount" type="text" >
+		
+				<label>Savings</label>
+				<input id="Saving" name="saveamount" type="text">
+			<p></p>
+				<p></p>
+
+					
+					<ol>
+						
+							<input name="inputdata" value='withdraw' type="radio">
+							<label>Update</label>
+					    
+							<input name="inputdata" value='deposit' type="radio">
+							<label>Delete Account</label>
+							
+
+					</ol>
+					<button type="submit">Submit</button>
+
+						</fieldset>
+    </form>
+		<p></p>
+			<p></p>
+		
+				<button type="cancel" onclick="window.location.href='http://localhost/Fake_Bank/html_files/Login.html'">Log off</button>
+
+
+        
+    </div>
+
+</body></html>

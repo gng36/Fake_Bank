@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+th {text-align: left;}
+</style>
+</head>
+<body>
+<?php
+$q = intval($_GET['q']);
+
+$con = new mysqli("localhost", "root", "ADPadp44", "fake_bank");
+if (!$con) {
+    die('Could not connect: ' . mysqli_error($con));
+}
+
+mysqli_select_db($con,"fake_bank");
+$sqli1="SELECT balance FROM account WHERE account_number = '2' and type ='Checkings'";
+
+$sqli2="SELECT balance FROM account WHERE account_number = '1' and type ='Savings'";
+$result1 = mysqli_query($con,$sqli1);
+$result2 = mysqli_query($con,$sqli2);
+
+echo $result1;
+echo $result2;
+
+mysqli_close($con);
+?>
+
+</body>
+</html>
+

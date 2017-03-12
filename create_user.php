@@ -20,5 +20,10 @@
 	//echo $finQuery;
 	$con->query($finQuery);
 	
+	$con->query("insert into account (type, username, balance, interest_rate) values ('savings','". $_POST['username'] ."', 0.00, 1.0000)");
+	$con->query("insert into account (type, username, balance, interest_rate) values ('checkings','". $_POST['username'] ."', 0.00, 0.0000)");
+	header("Location: http://localhost/Fake_Bank/html_files/Login.html");
+
+	
 
 ?>
