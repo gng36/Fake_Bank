@@ -30,7 +30,7 @@ create table transaction (
 	acc_num_from int,
 	withdraw_from_acc_num int,
 	deposit_to_acc_num int,
-	trans_date Date,
+	trans_date datetime default current_timestamp,
 	amount decimal(20,2),
 	foreign key (acc_num_to) references account(account_number),
 	foreign key (acc_num_from) references account(account_number),
