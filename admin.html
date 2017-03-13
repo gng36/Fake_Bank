@@ -4,35 +4,7 @@
 		<META http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-         <script type="text/javascript">
-            $(document).ready(function(){
-            var response = '';
-            $.ajax({ type: "GET",   
-                     url: "get_acct_info.php",   
-                     async: false,
-                     success : function(text)
-                     {
-			var rdata = jQuery.parseJSON(text);
-                         response = rdata;
-                     }
-            });
-
-            console.log(response);
-		document.getElementById('name1').value = response.name;
-		document.getElementById('Checking').value = response.Checking;
-		document.getElementById('Saving').value = response.Saving;
-            });
-            </script>
-
-
-<!--
-<script type="text/javascript">
-$.get("get_acct_info.php", function(data){
-	var mydata=$.parseJSON(data);
-	var name = mydata.name;
-console.log(mydata);
-});
-</script>-->
+  
 	</head>
 <body>
     <div>
@@ -43,16 +15,16 @@ console.log(mydata);
 		
 		<p>Account Update</p>
 		<p></p>
-		<form action="adminUpdate.php" method="post">
+		<form action="old_admin_update.php" method="post">
 						<label>Username</label>
-				<input id="name1" name="username" type="text" >
+				<input id="username" name="username" type="text" >
 		
 			
 				<label>Checking</label>
-				<input id="Checking" name="checkamount" type="text" >
+				<input id="checkamount" name="checkamount" type="text">
 		
 				<label>Savings</label>
-				<input id="Saving" name="saveamount" type="text">
+				<input id="saveamount" name="saveamount" type="text">
 			<p></p>
 				<p></p>
 
@@ -79,5 +51,25 @@ console.log(mydata);
 
         
     </div>
+
+	<script>
+
+		var urlPar = getAllUrlParametersHash();
+		for (var foo in urlPar){
+console.log(foo);
+			document.getElementById(foo).value = urlPar[foo];
+		}
+
+		
+
+		function getAllUrlParametersHash(){
+			var hash = {};
+			for(var i = 0; i < location.search.replace('?','').split('&').length; i++) {
+				hash[location.search.replace('?','').split('&')[i].split('=')[0]] = location.search.replace('?','').split('&')[i].split('=')[1];
+			}
+			return hash;
+		}
+
+	</script>
 
 </body></html>

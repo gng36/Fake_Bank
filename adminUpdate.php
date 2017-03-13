@@ -7,13 +7,12 @@ session_start();
 	$mysqli = new mysqli("localhost", "root", "ADPadp44", "fake_bank");
 
 	//$username= 'user12';
-$username = $_SESSION['user'];
+//$username = $_SESSION['user'];
 //echo $row['balance'];
-//$username1=$_POST['name1'];
+$username=$_POST['name1'];
 $checkamount= $_POST['checkamount'];
 $saveamount= $_POST['saveamount'];
 $inputdata=$_POST['inputdata'];
-$amount=$_POST['amount'];
 $accountnum=$_POST['accountnumber'];
 
 
@@ -42,17 +41,17 @@ echo $checkingnum['account_number'];
 echo "<div></div>";*/
 
 //echo $inputdata;
-if ($inputdata == 'withdraw' and $amount < $checkamount){
+if ($inputdata == 'delete' and $amount < $checkamount){
 $res = $mysqli->query("insert into transaction (type, withdraw_from_acc_num, amount) values ('withdraw',". $checkingnum['account_number'] . ", " . $amount .")");
-	//$row = $res->fetch_assoc();
-header("Location: http://localhost/Fake_Bank/html_files/accountinfo.html");
+	
+header("Location: http://localhost/Fake_Bank/html_files/admin.html");
 }
 
 else if($inputdata == 'deposit'){
 	//echo "insert into transaction (type, deposit_to_acc_num, amount) values ('deposit',". $checkingnum['account_number'] . ", " . $amount .")";
 $res = $mysqli->query("insert into transaction (type, deposit_to_acc_num, amount) values ('deposit',". $checkingnum['account_number'] . ",".$amount.")");
 //$row = $res->fetch_assoc();
-header("Location: http://localhost/Fake_Bank/html_files/accountinfo.html");
+header("Location: http://localhost/Fake_Bank/html_files/admin.html");
 }
 else if($inputdata == 'Ctransfer' and $amount < $saveamount){
 	$res = $mysqli->query("insert into transaction (type, acc_num_to, acc_num_from, amount) values ('transfer'," . $checkingnum['account_number'] . "," . $savingsnum['account_number'] . "," . $amount . ")");
