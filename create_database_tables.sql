@@ -1,3 +1,4 @@
+drop database fake_bank;
 create database fake_bank;
 
 use fake_bank;
@@ -19,7 +20,7 @@ create table account (
 	username varchar(255) not null,
 	balance decimal(20,2) not null default 0.0,
 	interest_rate decimal(4,2) not null default 1,
-	foreign key (username) references user(username),
+	foreign key (username) references user(username) on delete cascade,
 	primary key (account_number)
 );
 
@@ -30,12 +31,12 @@ create table transaction (
 	acc_num_from int,
 	withdraw_from_acc_num int,
 	deposit_to_acc_num int,
-	trans_date Date,
+	trans_time timestamp DEFAULT CURRENT_TIMESTAMP,
 	amount decimal(20,2),
-	foreign key (acc_num_to) references account(account_number),
-	foreign key (acc_num_from) references account(account_number),
-	foreign key (withdraw_from_acc_num) references account(account_number),
-	foreign key (deposit_to_acc_num) references account(account_number),
+	foreign key (acc_num_to) references account(account_number) on delete cascade,
+	foreign key (acc_num_from) references account(account_number) on delete cascade,
+	foreign key (withdraw_from_acc_num) references account(account_number) on delete cascade,
+	foreign key (deposit_to_acc_num) references account(account_number) on delete cascade,
 	primary key(trans_id)
 );
 
