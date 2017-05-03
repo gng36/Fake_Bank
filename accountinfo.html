@@ -1,12 +1,43 @@
+
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
-		<META http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body>
+		<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+         <script type="text/javascript">
+            $(document).ready(function(){
+            var response = '';
+            $.ajax({ type: "GET",   
+                     url: "get_acct_info.php",   
+                     async: false,
+                     success : function(text)
+                     {
+			var rdata = jQuery.parseJSON(text);
+                         response = rdata;
+                     }
+            });
+
+            
+		document.getElementById('name1').value = response.name;
+		document.getElementById('username').value = response.name;
+		document.getElementById('username2').value = response.name;
+		document.getElementById('Checking').value = response.Checking;
+		document.getElementById('Saving').value = response.Saving;
+		
+		document.getElementById('sav_month_in').value = response.sav_month_in.toFixed(2);
+            });
+            </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+       
 
 
+
+
+	</head>
+<body>
     <div>
-    
-     <form>
 
 	<fieldset>
 		<p>Welcome to FAKE BANK</p>
@@ -14,49 +45,122 @@
 		
 		<p>Account balances</p>
 		<p></p>
-						<label>Account Number</label>
-				<input name="accountnum" type="text" readonly value="">
-		
+		<form action="update_data.php" method="post">
+				<label>Username</label>
+				<input id="name1" name="username" type="text" readonly value="">
 			
 				<label>Checking</label>
-				<input name="checkamount" type="text" readonly value="">
+				<input id="Checking" name="checkamount" type="text" readonly value="">
 		
 				<label>Savings</label>
-				<input name="saveamount" type="text"  readonly value="">
+				<input id="Saving" name="saveamount" type="text"  readonly value="">
 			<p></p>
 				<p></p>
 			
 				<p></p>
 			<label>Amount</label>
-				<input name="text" type="text">
+				<input id="amount" name="amount" type="text">
 					
+			
+
+			<label>Savings Monthly Interest</label>
+			<input id="sav_month_in" name="sav_month_in" type="text" readonly value="">
 					<ol>
 						
-							<input name="withdraw" type="radio">
+							<input name="inputdata" value='withdraw' type="radio">
 							<label>Withdraw</label>
 					    
-							<input name="deposit" type="radio">
+							<input name="inputdata" value='deposit' type="radio">
 							<label>Deposit</label>
 							
-							<input name="transferts" type="radio">
-							<label>Transfer to savings</label>
+							<input name="inputdata" value='Ctransfer' type="radio">
+							<label>Transfer to checkings</label>
 							
-							<input name="transfertc" type="radio">
-							<label>Transfer to checking</label>
+							<input name="inputdata" value='Stransfer' type="radio">
+							<label>Transfer to savings</label>
 
 					</ol>
-						<button type="submit">Submit</button>
+					<button type="submit">Submit</button>
+
 						</fieldset>
     </form>
+
+<form action="get_tran.php" method="post">
+			<label>Username</label>
+			<input id="username" name="username" type="text" readonly value="">
+
+			<label>Month</label>
+				<select id="month" name="month">
+					<option value="1">January</option>
+					<option value="2">February</option>
+					<option value="3">March</option>
+					<option value="4">April</option>
+					<option value="5">May</option>
+					<option value="6">June</option>
+		
+				</select>
+			<label>Year</label>
+				<select id="year" name="year">
+					
+					<option value="2017">2017</option>
+					<option value="2018">2018</option>
+		
+				</select>
+
+
+<input id="tran" type="submit" value="View Monthly Transactions" />
+</form>
+
 		<p></p>
 			<p></p>
 		
-				<button type="cancel" onclick="window.location.href='file:///C:/Users/ngg/Desktop/Project/Login.html'">Log off</button>
+			<!--<button type="cancel" onclick="window.location.href='http://localhost/Fake_Bank/html_files/Login.html'">Log off</button>-->
 
 
      
    
         
     </div>
+
+	<div>
+		<div>Create automatic payments</div>
+
+		<form action="monthly_payment.php" method="post">
+			<label>Username</label>
+			<input id="username2" name="username" type="text" readonly value=""><br />
+			<label>Vendor</label>
+			<input id="vendor" name="vendor" type="text" value=""><br />
+			<label>Account</label>
+			<select id="acc_num" name="acc_num">
+				<option value="checkings">Checking</option>
+				<option value="savings">Saving</option>
+			</select><br />
+			<label>Address</label>
+			<input id="address" name="address" type="text" value=""><br />
+			<label>Amount</label>
+			<input id="amount" name="amount" type="number" value=""><br />
+			<label>Payment Frequency</label>
+			<select id="payment_freq" name="payment_freq">
+				<!--<option value="daily">Daily</option>
+				<option value="week">Weekly</option>
+				<option value="bi-week">Bi-Weekly</option>-->
+				<!--<option value="semi">Semi-Monthly</option>-->
+				<option value="monthly">Monthly</option>
+				<!--<option value="yearly">Yearly</option>-->
+	
+			</select><br />
+
+			<input type="submit" value="Create Monthly Payment" />
+		</form>
+		<form action="show_monthly_tran.php" method="post">
+			<input type="submit" value="View Monthly Payment" />
+		</form>
+	<p></p>
+		
+				<button type="cancel" onclick="window.location.href='http://localhost/Fake_Bank/html_files/Login.html'">Log off</button>
+
+
+     
+	</div>
 
 </body></html>

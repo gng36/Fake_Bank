@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+	</head>
+<body>
+    <div>
+
+		<p>Welcome to FAKE BANK</p>
+		<p>Account Update</p>
+		<p></p>
+		<form action="adminUpdate.php" method="post">
+			<label>Username</label>
+			<input id="username" name="username" type="text">
+	
+		
+			<label>Checking</label>
+			<input id="chk" name="chk" type="text">
+	
+			<label>Savings</label>
+			<input id="sve" name="sve" type="text">
+			<p></p>
+			<p></p>
+			<ol>
+				<input name="inputdata" value="accbal" type="radio">
+				<label>Retrieve Account Balances</label>
+
+				<input name="inputdata" value="update" type="radio">
+				<label>Update Account Balances</label>
+
+				<input name="inputdata" value="delete" type="radio">
+				<label>Delete Account</label>					
+			</ol>
+				<input type="submit" value="Submit">
+
+	    </form>
+		<p></p>
+		<p></p>
+		
+		<button type="cancel" onclick="window.location.href=&#39;http://localhost/Fake_Bank/html_files/Login.html&#39;">Log off</button>
+
+    </div>
+
+	<script>
+
+		var urlPar = getAllUrlParametersHash();
+		for (var foo in urlPar){
+			
+			document.getElementById(foo).value = urlPar[foo];
+		}
+
+		
+
+		function getAllUrlParametersHash(){
+			var hash = {};
+			for(var i = 0; i < location.search.replace('?','').split('&').length; i++) {
+				hash[location.search.replace('?','').split('&')[i].split('=')[0]] = location.search.replace('?','').split('&')[i].split('=')[1];
+			}
+			return hash;
+		}
+
+	</script>
+
+
+
+</body></html>
